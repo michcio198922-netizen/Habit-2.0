@@ -354,16 +354,21 @@ private fun HabitsScreen(
                 )
             }
         } else {
-            items(visibleHabits, key = { it.id }) { habit ->
-                HabitCard(
-                    habit = habit,
-                    statuses = statuses,
-                    today = today,
-                    onStatus = { onStatus(habit, it) },
-                    onDelete = { onDelete(habit) },
-                    onEdit = { onEdit(habit) }
-                )
-            }
+            items(
+    count = visibleHabits.size,
+    key = { index -> visibleHabits[index].id }
+) { index ->
+    val habit = visibleHabits[index]
+
+    HabitCard(
+        habit = habit,
+        statuses = statuses,
+        today = today,
+        onStatus = { status -> onStatus(habit, status) },
+        onDelete = { onDelete(habit) },
+        onEdit = { onEdit(habit) }
+    )
+}
         }
     }
 }
